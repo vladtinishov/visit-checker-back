@@ -107,9 +107,13 @@ export class DetectorService {
   }
 
   async getSimilarityImages(image: Express.Multer.File) {
+    console.log('we are here 2');
+
     const filesPath = getAllFilesFromDirectory('photos');
+    console.log('we are here 3');
 
     const resultImages: ImageSimilarityDto[] = [];
+    console.log('we are here 4');
 
     for (const imageName of filesPath) {
       const imagePath = getFilePath('photos', imageName);
@@ -121,18 +125,22 @@ export class DetectorService {
         resultImages.push({ similarity, imageName });
       }
     }
+    console.log('we are here 5');
 
     return resultImages;
   }
 
   async getDataByFace(image: Express.Multer.File): Promise<PhotoDataDto> {
+    console.log('we are here 1');
     const similarImages: ImageSimilarityDto[] = await this.getSimilarityImages(
       image,
     );
 
+    console.log('we are here 6', similarImages);
     const mostSimilar = sortByField(similarImages, 'similarity', 'desc')[0];
-
+    console.log('we are here 7', mostSimilar);
     const photo = await this.photosService.getOneByName(mostSimilar.imageName);
+    console.log('we are here 8', photo);
 
     return photo.data;
   }
