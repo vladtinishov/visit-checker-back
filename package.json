@@ -25,6 +25,7 @@
     "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
+    "@tensorflow/tfjs-node": "^4.7.0",
     "@vladmandic/face-api": "^1.7.12",
     "mysql2": "^3.3.5",
     "passport": "^0.6.0",
