@@ -33,10 +33,6 @@ export class PhotosService {
     return this.repo.delete(id);
   }
 
-  async getManyByNames(names: string[]): Promise<Photo[]> {
-    return this.repo.find({ where: { name: In(names) } });
-  }
-
   async getOneByName(name: string): Promise<Photo> {
     return this.repo.findOne({ where: { name } });
   }
