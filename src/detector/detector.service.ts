@@ -47,6 +47,7 @@ export class DetectorService {
   }
 
   async compareFaces(tensor1: tf.Tensor4D, tensor2: tf.Tensor4D) {
+    console.log('START COMPARE');
     await this.loadModels();
 
     this.optionsSSDMobileNet = new faceapi.SsdMobilenetv1Options({
