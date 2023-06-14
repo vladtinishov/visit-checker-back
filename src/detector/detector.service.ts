@@ -110,7 +110,7 @@ export class DetectorService {
     console.log('we are here 2');
 
     const filesPath = getAllFilesFromDirectory('photos');
-    console.log('we are here 3');
+    console.log('we are here 3', filesPath);
 
     const resultImages: ImageSimilarityDto[] = [];
     console.log('we are here 4');
