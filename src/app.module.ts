@@ -13,7 +13,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 @Module({
   imports: [
     DetectorModule,
-    TypeOrmModule.forRootAsync({
+    TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env[`DB_HOST_${process.env.MODE.toUpperCase()}`],
       port: parseInt(process.env[`DB_PORT_${process.env.MODE.toUpperCase()}`]),
