@@ -82,6 +82,9 @@ export class EventsService {
       where: { roomId, date: currentDate },
     });
 
+    console.log({ currentDate })
+    console.log({ events })
+
     const currentEvent = events.find((event: Event) => {
       return isBetween(event.startTime, event.endTime);
     });
