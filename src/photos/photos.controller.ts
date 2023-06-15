@@ -2,7 +2,8 @@ import {
   Controller,
   UploadedFile,
   Post,
-  UseInterceptors, Body,
+  UseInterceptors,
+  Body,
 } from '@nestjs/common';
 import { PhotosService } from './photos.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -17,7 +18,7 @@ export class PhotosController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './photos',
+        destination: './src/photos/uploaded',
         filename: (req, file, cb) => {
           req.files;
           const suffix = Date.now() + '-' + Math.round(Math.random() + 1e9);

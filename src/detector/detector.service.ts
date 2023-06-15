@@ -109,14 +109,15 @@ export class DetectorService {
   async getSimilarityImages(image: Express.Multer.File) {
     console.log('we are here 2');
 
-    const filesPath = getAllFilesFromDirectory('photos');
+    const filesPath = getAllFilesFromDirectory('./src/photos/uploaded/');
     console.log('we are here 3', filesPath);
 
     const resultImages: ImageSimilarityDto[] = [];
     console.log('we are here 4');
 
     for (const imageName of filesPath) {
-      const imagePath = getFilePath('photos', imageName);
+      const imagePath = getFilePath('./src/photos/uploaded/', imageName);
+      console.log(imagePath);
       const tensor1 = await this.getTensorFromPath(imagePath);
       const tensor2 = await this.getTensorFromFile(image);
       const similarity = await this.compareFaces(tensor1, tensor2);
