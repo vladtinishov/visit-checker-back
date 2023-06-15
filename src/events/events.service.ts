@@ -7,7 +7,7 @@ import { EventReportDto, GetEventsReportsDto } from './dto/event-report.dto';
 import { EventVisit } from './entities/event-visit.entitiy';
 import { Room } from '../rooms/entities/room.entity';
 import { User } from '../users/entity/user.entity';
-import { getCurrentDate, isBetween } from '../../utils/time';
+import {getCurrentDate, getCurrentTime, isBetween} from '../../utils/time';
 
 @Injectable()
 export class EventsService {
@@ -83,6 +83,7 @@ export class EventsService {
     });
 
     console.log({ currentDate })
+    console.log({ currentTime: getCurrentTime() })
     console.log({ events })
 
     const currentEvent = events.find((event: Event) => {
