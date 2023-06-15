@@ -11,7 +11,7 @@ dayjs.tz.setDefault(timezoneName);
 
 export function setTime(time: string) {
   const [hours, minutes] = time.split(':');
-  return dayjs(dayjs().tz(timezoneName).format('YYYY-MM-DD HH:mm'))
+  return dayjs(dayjs().add(6, 'hour').format('YYYY-MM-DD HH:mm'))
     .hour(+hours)
     .minute(+minutes);
 }
@@ -35,7 +35,7 @@ export function isBetween(time1: string, time2: string) {
 }
 
 export function getCurrentDate() {
-  return dayjs().tz(timezoneName).format('YYYY-MM-DD');
+  return dayjs().add(6, 'hour').format('YYYY-MM-DD');
 }
 
 export function getTimeDifference(time1, time2) {
@@ -45,5 +45,5 @@ export function getTimeDifference(time1, time2) {
 }
 
 export function getCurrentTime() {
-  return dayjs().tz(timezoneName).format('HH:mm');
+  return dayjs().add(6, 'hour').format('HH:mm');
 }
