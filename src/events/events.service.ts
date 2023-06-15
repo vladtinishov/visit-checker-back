@@ -78,6 +78,7 @@ export class EventsService {
 
   async getCurrentEvent(roomId: number) {
     const currentDate = getCurrentDate();
+    console.log({currentDate});
     const events = await this.repo.find({
       where: { roomId, date: currentDate },
     });
