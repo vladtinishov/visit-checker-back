@@ -23,7 +23,7 @@ export class Event {
   name: string;
 
   @Column({ type: 'date' })
-  date: Date;
+  date: string;
 
   @Column()
   startTime: string;

@@ -7,6 +7,7 @@ import { EventReportDto, GetEventsReportsDto } from './dto/event-report.dto';
 import { EventVisit } from './entities/event-visit.entitiy';
 import { Room } from '../rooms/entities/room.entity';
 import { User } from '../users/entity/user.entity';
+import { getCurrentDate, isBetween } from '../../utils/time';
 
 @Injectable()
 export class EventsService {
@@ -73,5 +74,20 @@ export class EventsService {
     }
 
     return result;
+  }
+
+  async getCurrentEvent(roomId: number) {
+    const currentDate = getCurrentDate();
+    const events = await this.repo.find({
+      where: { roomId, date: currentDate },
+    });
+
+    const currentEvent = events.find((event: Event) => {
+      return isBetween(event.startTime, event.endTime);
+    });
+
+    if (currentEvent) return currentEvent;
+
+    return undefined;
   }
 }

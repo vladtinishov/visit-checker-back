@@ -11,10 +11,17 @@ import { ImageSimilarityDto } from '../photos/dto/image-similarity.dto';
 import { sortByField } from '../../utils/helpers';
 import { faceDetectApi } from '../api/face-detect/face-detect';
 import * as FormData from 'form-data';
+import { EventsService } from '../events/events.service';
+import { RoomsService } from '../rooms/rooms.service';
+import {getCurrentTime, getTimeDifference} from "../../utils/time";
 
 @Injectable()
 export class DetectorService {
-  constructor(private photosService: PhotosService) {}
+  constructor(
+    private photosService: PhotosService,
+    private eventsService: EventsService,
+    private roomsService: RoomsService,
+  ) {}
 
   async compareFacesTest(): Promise<number> {
     return 1;
@@ -53,5 +60,21 @@ export class DetectorService {
     const photo = await this.photosService.getOneByName(mostSimilar.imageName);
 
     return photo.data;
+  }
+
+  async handleWebhook(image: Express.Multer.File, roomId: number) {
+    const imageData = await this.getDataByFace(image);
+    const room = await this.roomsService.findOne(roomId);
+    const currentEvent = await this.eventsService.getCurrentEvent(roomId);
+
+    if (!currentEvent) return { error: 'Event is not found' };
+
+    return await this.eventsService.setReport({
+      roomId,
+      userId: imageData.id,
+      groupId: room.groupId,
+      eventId: currentEvent.id,
+      lateTime: getTimeDifference(getCurrentTime(), currentEvent.startTime),
+    });
   }
 }
