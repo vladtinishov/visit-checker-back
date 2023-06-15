@@ -13,6 +13,7 @@ export class PhotosService {
   ) {}
 
   getObjectToSave(file: Express.Multer.File, data: PhotoDataDto) {
+    console.log(file)
     return {
       userId: 1,
       name: file.filename,

@@ -4,10 +4,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 @Controller('detector')
 export class DetectorController {
   constructor(private readonly service: DetectorService) {}
-  @Get('/detect-test')
-  testDetector() {
-    return this.service.detectFaceTest();
-  }
   @Get('/compare-test')
   testComparing() {
     return this.service.compareFacesTest();

@@ -35,3 +35,7 @@ export function getAllFilesFromDirectory(
 export function getFilePath(dirPath: string, fileName: string) {
   return path.join(dirPath, fileName);
 }
+
+export function convertFileToBase64(buffer: Buffer) {
+  return Buffer.from(buffer).toString('base64');
+}
