@@ -2,7 +2,7 @@ import * as dayjs from 'dayjs';
 
 export function setTime(time: string) {
   const [hours, minutes] = time.split(':');
-  return dayjs(dayjs().format('YYYY-MM-DD HH:mm'))
+  return dayjs(dayjs().add(5, 'hour').format('YYYY-MM-DD HH:mm'))
     .hour(+hours)
     .minute(+minutes);
 }
@@ -26,7 +26,7 @@ export function isBetween(time1: string, time2: string) {
 }
 
 export function getCurrentDate() {
-  return dayjs().format('YYYY-MM-DD');
+  return dayjs().add(5, 'hour').format('YYYY-MM-DD');
 }
 
 export function getTimeDifference(time1, time2) {
@@ -36,5 +36,5 @@ export function getTimeDifference(time1, time2) {
 }
 
 export function getCurrentTime() {
-  return dayjs().format('HH:mm');
+  return dayjs().add(5, 'hour').format('HH:mm');
 }
