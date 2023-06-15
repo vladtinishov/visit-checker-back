@@ -49,16 +49,22 @@ export class DetectorService {
   async compareFaces(tensor1: tf.Tensor4D, tensor2: tf.Tensor4D) {
     console.log('START COMPARE');
     await this.loadModels();
+    console.log('MODELS LOADED');
 
     this.optionsSSDMobileNet = new faceapi.SsdMobilenetv1Options({
       minConfidence: 0.5,
     });
+    console.log('OPTIONS GOT');
 
     // Вычисление дескрипторов лиц
     // @ts-ignore
     const descriptor1 = await faceapi.computeFaceDescriptor(tensor1);
+    console.log('DESCRIPTOR 1 GOT');
+
     // @ts-ignore
     const descriptor2 = await faceapi.computeFaceDescriptor(tensor2);
+
+    console.log('DESCRIPTOR 2 GOT');
 
     // Сравнение дескрипторов лиц
     const distance = faceapi.euclideanDistance(
@@ -66,13 +72,16 @@ export class DetectorService {
       descriptor2 as Float32Array,
     );
 
+    console.log('DISTANCE');
+
     // Определение, насколько лица похожи
     const similarity = 1 - distance;
+    console.log('SIMILARITY GOT');
 
     // Освобождение памяти
     tensor1.dispose();
     tensor2.dispose();
-
+    console.log('END COMPARE');
     return similarity;
   }
 
