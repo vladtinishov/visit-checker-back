@@ -64,7 +64,9 @@ export class DetectorService {
 
   async handleWebhook(image: Express.Multer.File, roomId: number) {
     const imageData = await this.getDataByFace(image);
+    console.log(imageData);
     const room = await this.roomsService.findOne(roomId);
+    console.log(room);
     const currentEvent = await this.eventsService.getCurrentEvent(roomId);
 
     if (!currentEvent) return { error: 'Event is not found' };

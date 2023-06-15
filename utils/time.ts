@@ -9,6 +9,7 @@ export function setTime(time: string) {
 
 export function isBetween(time1: string, time2: string) {
   const currentTime = setTime(dayjs().format('HH:mm'));
+  console.log({ hour: currentTime.hour() });
   const isSame = currentTime.isSame(setTime(time1));
   const isAfter = currentTime.isAfter(setTime(time1));
   const isBefore = currentTime.isBefore(setTime(time1));
