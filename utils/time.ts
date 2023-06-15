@@ -17,7 +17,7 @@ export function setTime(time: string) {
 }
 
 export function isBetween(time1: string, time2: string) {
-  const currentTime = setTime(dayjs().format('HH:mm'));
+  const currentTime = setTime(dayjs().add(6, 'hour').format('HH:mm'));
   console.log({ hour: currentTime.hour() });
   const isSame = currentTime.isSame(setTime(time1));
   const isAfter = currentTime.isAfter(setTime(time1));
