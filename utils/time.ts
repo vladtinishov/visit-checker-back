@@ -1,8 +1,17 @@
 import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+// Установка временной зоны
+const timezoneName = 'Asia/Almaty'; // Название временной зоны
+dayjs.tz.setDefault(timezoneName);
 
 export function setTime(time: string) {
   const [hours, minutes] = time.split(':');
-  return dayjs(dayjs().add(5, 'hour').format('YYYY-MM-DD HH:mm'))
+  return dayjs(dayjs().format('YYYY-MM-DD HH:mm'))
     .hour(+hours)
     .minute(+minutes);
 }
@@ -26,7 +35,7 @@ export function isBetween(time1: string, time2: string) {
 }
 
 export function getCurrentDate() {
-  return dayjs().add(5, 'hour').format('YYYY-MM-DD');
+  return dayjs().format('YYYY-MM-DD');
 }
 
 export function getTimeDifference(time1, time2) {
@@ -36,5 +45,5 @@ export function getTimeDifference(time1, time2) {
 }
 
 export function getCurrentTime() {
-  return dayjs().add(5, 'hour').format('HH:mm');
+  return dayjs().format('HH:mm');
 }
